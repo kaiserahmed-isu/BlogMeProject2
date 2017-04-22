@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head(title='Ooops!')"/>
+<body>
+<nav th:replace="fragments/common :: navbar"/>
+<main class="container">
+    <th:block th:switch="${error}">
+        <header class="page-header" th:case="'Not Found'">
+            <h1>Page not found!!</h1>
+        </header>
+        <header class="page-header" th:case="'Forbidden'">
+            <h1>You don't have permission to view this page.</h1>
+        </header>
+        <header class="page-header" th:case="'Bad Request'">
+            <h1>We cannot find this ad. Try the search form...</h1>
+        </header>
+
+        <p class="lead" th:text="${error}"/>
+    </th:block>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe
+            src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+            allowfullscreen="allowfullscreen"
+        >
+    </iframe>
+    </div>
+</main>
+<span th:replace="fragments/common :: scripts"/>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head(title='Publish a post')"/>
+<body>
+<nav th:replace="fragments/common :: navbar"/>
+<main class="container">
+    <header class="page-header"><h1>Publish a new post</h1></header>
+    <section th:replace="fragments/posts :: form(
+        action='/posts/create',
+        post=${post},
+        label='Publish'
+    )"/>
+</main>
+<span th:replace="fragments/common :: scripts"/>
+</body>
+</html>

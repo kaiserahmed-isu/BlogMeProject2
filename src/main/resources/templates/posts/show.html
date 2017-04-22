@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head(title='View post details')"/>
+<body>
+<nav th:replace="fragments/common :: navbar"/>
+<main class="container">
+
+    <h1 th:text="${post.title}" />
+    <div class="row">
+        <div class="col-md-12">
+            <img
+                    th:if="${post.image}"
+                    th:src="${'/posts/image/' + post.image}"
+                    class="img-responsive img-thumbnail pull-left" style="margin-right: 10px; margin-bottom: 10px;" alt="blog img" width="304" height="236"
+            />
+            <p th:text="${post.body}" />
+        </div>
+    </div>
+
+
+
+</main>
+<span th:replace="fragments/common :: scripts"/>
+</body>
+</html>

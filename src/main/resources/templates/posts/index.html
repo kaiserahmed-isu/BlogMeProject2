@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
+<head th:replace="fragments/common :: head(title='View all posts')"/>
+<body>
+    <nav th:replace="fragments/common :: navbar"/>
+    <main class="container">
+        <header class="page-header"><h1>All posts</h1></header>
+        <section class="col-md-6" th:each="post: ${posts}">
+            <article class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="lead" th:text="${post.title}" />
+                </div>
+                <div class="panel-body">
+                    <p th:text="${post.body}"/>
+                </div>
+                <div class="panel-footer">
+                    <a th:href="${'/posts/' + post.id }" class="btn btn-success">
+                        Read
+                    </a>
+                    <a
+                        class="btn btn-primary"
+                        th:href="${'/posts/' + post.id + '/edit' }"
+                        sec:authorize="isAuthenticated()"
+                        th:if="${#authentication.principal.username == post.author.username}"
+                    >
+                        Edit
+                    </a>
+                    <form
+                        method="post"
+                        th:action="${'/posts/' + post.id + '/delete'}"
+                        sec:authorize="isAuthenticated()"
+                        th:if="${#authentication.principal.username == post.author.username}"
+                    >
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+    <span th:replace="fragments/common :: scripts"/>
+</body>
+</html>
