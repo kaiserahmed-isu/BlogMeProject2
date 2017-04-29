@@ -4,6 +4,9 @@ import com.blogmeproject2.exceptions.PostNotFound;
 import com.blogmeproject2.models.Post;
 import com.blogmeproject2.models.User;
 import com.blogmeproject2.services.PostService;
+import jgravatar.Gravatar;
+import jgravatar.GravatarDefaultImage;
+import jgravatar.GravatarRating;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +57,23 @@ public class PostsController {
         if (post == null) {
             throw new PostNotFound(String.format("Post with ID %d cannot be found", id));
         }
+        User user = post.getAuthor();
+
+        user.getEmail();
+
+        Gravatar gravatar = new Gravatar();
+        gravatar.setSize(50);
+        gravatar.setRating(GravatarRating.GENERAL_AUDIENCES);
+        gravatar.setDefaultImage(GravatarDefaultImage.IDENTICON);
+        String url = gravatar.getUrl(user.getEmail());
+      //  byte[] profile = gravatar.download(user.getEmail());
+
+        // XML api : https://en.gravatar.com/4a223592065d279edf101e116faf55ff.xml
+
+
+        viewModel.addAttribute("authorName", user.getFullName());
+
+        viewModel.addAttribute("profileImage", url);
 
         viewModel.addAttribute("post", post);
 

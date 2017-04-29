@@ -45,6 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // Allow without login
                 .antMatchers("/", "/posts/{id}", "/posts/image/**", "/logout")
                 .permitAll()
+                .antMatchers( "/api/post/{id}", "/api/posts", "/api/posts/")
+                .permitAll()
             .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout")

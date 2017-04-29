@@ -6,6 +6,8 @@ import com.blogmeproject2.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -23,6 +25,7 @@ public class PostService {
     public Iterable<Post> findAllPosts() {
         return repository.findAll();
     }
+
 
     public void save(Post post) {
         repository.save(post);

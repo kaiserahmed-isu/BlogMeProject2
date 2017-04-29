@@ -10,4 +10,5 @@ public interface UsersRepository extends CrudRepository<User, Integer> {
     // select * from user where username = ?
     // automagic
     public User findByUsername(String username);
+
 }
